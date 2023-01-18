@@ -28,4 +28,13 @@ class LoginUserRequest extends FormRequest
             'password' => 'required',
         ];
     }
+
+    public function getPasswordCredentials($password)
+    {
+        return [
+            'password' => $password,
+        ];
+        
+        // return $input;
+    }
 }

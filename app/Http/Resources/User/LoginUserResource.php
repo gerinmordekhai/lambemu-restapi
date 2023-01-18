@@ -28,7 +28,15 @@ class LoginUserResource extends JsonResource
         return [
             'status' => $this->status,
             'message' => $this->message,
-            'data' => $this->resource,
+            'data' => [
+                'id' => $this->id,
+                'first_name' => $this->first_name,
+                'first_name' => $this->first_name,
+                'profile_picture' => $this->profile_picture,
+                'username' => $this->username,
+                'email' => $this->email,
+                'phone_number' => $this->phone_number,
+            ],
             'token' => $this->token,
         ];
     }

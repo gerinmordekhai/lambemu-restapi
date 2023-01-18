@@ -8,11 +8,16 @@ class UserResource extends JsonResource
 {
     public $status;
     public $message;
+    public $token;
 
-    public function __construct($status, $message, $resource) {
+    public function __construct($status, $message, $resource, $token = null) {
         parent::__construct($resource);
         $this->status = $status;
         $this->message = $message;
+        
+        if ($token != null) {
+            $this->token = $token;
+        }
     }
     
     /**
@@ -35,6 +40,7 @@ class UserResource extends JsonResource
                 'email' => $this->email,
                 'phone_number' => $this->phone_number,
             ],
+            'token' => $this->token,
         ];
     }
 }
