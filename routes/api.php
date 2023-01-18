@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\User\CreateUserController;
+use App\Http\Controllers\User\LoginUserController;
 use App\Http\Controllers\User\ShowAllUserController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', ShowAllUserController::class);
 Route::post('/user/post', CreateUserController::class);
+Route::post('/user/login', LoginUserController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
