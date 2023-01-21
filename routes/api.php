@@ -4,6 +4,7 @@ use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\LoginUserController;
 use App\Http\Controllers\User\LogoutUserController;
 use App\Http\Controllers\User\ShowAllUserController;
+use App\Http\Controllers\User\UpdateUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::prefix('user')->group(function () {
     Route::post('/login', LoginUserController::class);
     
     Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/edit', UpdateUserController::class);
         Route::post('/logout', LogoutUserController::class);
     });
 });

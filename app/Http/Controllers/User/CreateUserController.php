@@ -24,7 +24,7 @@ class CreateUserController extends Controller
 
         if ($validated['profile_picture']) {
             $extension = $validated['profile_picture']->extension();
-            $fileName = $validated['firstname'].'_'.'profile'.'_'.uniqid().$extension;
+            $fileName = 'profile'.'_'.'picture'.'_'.uniqid().$extension;
 
             $path = Storage::putFileAs('public/image/profile', $validated['profile_picture'] , $fileName);
             $link = Storage::url($path);
