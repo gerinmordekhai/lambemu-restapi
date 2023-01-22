@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\LoginUserRequest;
+use App\Http\Resources\ErrorResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -28,9 +29,7 @@ class LoginUserController extends Controller
                 return new UserResource(true, 'data login', $user, $token);
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'errors' => $e->getMessage(),
-            ]);
+            return new ErrorResource(false, 'error', $e->getMessage());
         }
     }
 

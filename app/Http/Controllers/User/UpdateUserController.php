@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\EditUserRequest;
+use App\Http\Resources\ErrorResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,18 +13,18 @@ use Illuminate\Support\Facades\Storage;
 
 class UpdateUserController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(EditUserRequest $request)
     {
         try {
             $user = Auth::user();
 
-            $validated = $request->validate([
-                'firstname' => 'alpha',
-                'lastname' => 'alpha',
-                'profile_picture' => 'mimes:png,jpg,jpeg|max:5048',
-                'username' => 'unique:users',
-                'phone_number' => 'unique:users'
-            ]);
+            $validated = [
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'profile_picture' => $request->profile_picture,
+                'username' => $request->username,
+                'phone_number' => $request->phone_number
+            ];
             
             if ($request->hasFile('profile_picture')) {
                 $file = filePath($validated['profile_picture']);
@@ -36,9 +37,7 @@ class UpdateUserController extends Controller
             
             return new UserResource(true, 'data updated', $udpatedUser);
         } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e->getMessage(),
-            ]);
+            return new ErrorResource(false, 'error', $e->getMessage());
         }
 
     }
@@ -49,9 +48,7 @@ class UpdateUserController extends Controller
             $user = User::where('id', $id)->update($data);
             return $user;
         } catch (\Exception $e) {
-            return response()->json([
-                'message method udpate' => $e->getMessage(),
-            ]);
+            return new ErrorResource(false, 'error', $e->getMessage());
         }
     }
 }

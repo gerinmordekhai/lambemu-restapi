@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Post\CreatePostController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\LoginUserController;
 use App\Http\Controllers\User\LogoutUserController;
@@ -26,6 +27,7 @@ Route::prefix('user')->group(function () {
     
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/edit', UpdateUserController::class);
+        Route::post('/post', CreatePostController::class);
         Route::post('/logout', LogoutUserController::class);
     });
 });

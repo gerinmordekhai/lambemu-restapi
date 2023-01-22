@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditUserRequest extends FormRequest
+class CreatePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,8 @@ class EditUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'firstname' => 'alpha',
-            'lastname' => 'alpha',
-            'profile_picture' => 'mimes:png,jpg,jpeg|max:5048',
-            'username' => 'unique:users',
-            'phone_number' => 'unique:users',
+            'desc' => 'required',
+            'img' => 'mimes:png,jpg,jpeg,gif|max:10048'
         ];
     }
 }
