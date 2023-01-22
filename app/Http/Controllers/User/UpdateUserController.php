@@ -26,7 +26,7 @@ class UpdateUserController extends Controller
             ]);
             
             if ($request->hasFile('profile_picture')) {
-                $file = $this->postFile($validated['profile_picture']);
+                $file = filePath($validated['profile_picture']);
                 $validated['profile_picture'] = $file;
                 Storage::delete('public/image/profile'.$user->profile_picture);
             }
@@ -41,17 +41,6 @@ class UpdateUserController extends Controller
             ]);
         }
 
-    }
-
-    public function postFile($file)
-    {
-        $extension = $file->extension();
-        $fileName = 'profile'.'_'.'picture'.'_'.uniqid().$extension;
-        $path = Storage::putFileAs('public/image/profile', $file , $fileName);
-        $link = Storage::url($path);
-        $file = $link;
-
-        return $file;
     }
 
     private function update($id, $data)

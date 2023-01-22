@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('img')->nullable();
-            $table->string('desc');
+            $table->string('desc')->nullable();
             $table->bigInteger('has_comments')->nullable();
             $table->bigInteger('has_likes')->nullable();
             $table->bigInteger('has_saved')->nullable();
